@@ -1,2 +1,8 @@
-.idea
-hospital.iml
+/.idea
+/logs
+/target
+*.class
+*.iml
+*.log
+*.jar
+/.mvn
