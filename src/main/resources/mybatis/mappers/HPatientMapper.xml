@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cunjunwang.hospital.dao.HPatientMapper">
+  <resultMap id="BaseResultMap" type="com.cunjunwang.hospital.model.po.HPatient">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
+    <result column="patient_gender" jdbcType="INTEGER" property="patientGender" />
+    <result column="patient_age" jdbcType="INTEGER" property="patientAge" />
+    <result column="patient_account_number" jdbcType="BIGINT" property="patientAccountNumber" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+    <result column="patient_status" jdbcType="INTEGER" property="patientStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+    <result column="patient_uuid" jdbcType="VARCHAR" property="patientUuid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, patient_name, patient_gender, patient_age, patient_account_number, is_del, patient_status, 
+    create_time, create_by, update_time, update_by, patient_uuid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_patient
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HPatient">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into h_patient (id, patient_name, patient_gender, 
+      patient_age, patient_account_number, is_del, 
+      patient_status, create_time, create_by, 
+      update_time, update_by, patient_uuid
+      )
+    values (#{id,jdbcType=BIGINT}, #{patientName,jdbcType=VARCHAR}, #{patientGender,jdbcType=INTEGER}, 
+      #{patientAge,jdbcType=INTEGER}, #{patientAccountNumber,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT}, 
+      #{patientStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, #{patientUuid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cunjunwang.hospital.model.po.HPatient">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into h_patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="patientName != null">
+        patient_name,
+      </if>
+      <if test="patientGender != null">
+        patient_gender,
+      </if>
+      <if test="patientAge != null">
+        patient_age,
+      </if>
+      <if test="patientAccountNumber != null">
+        patient_account_number,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="patientStatus != null">
+        patient_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="patientUuid != null">
+        patient_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=BIGINT},
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGender != null">
+        #{patientGender,jdbcType=INTEGER},
+      </if>
+      <if test="patientAge != null">
+        #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="patientAccountNumber != null">
+        #{patientAccountNumber,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="patientStatus != null">
+        #{patientStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="patientUuid != null">
+        #{patientUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cunjunwang.hospital.model.po.HPatient">
+    update h_patient
+    <set>
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGender != null">
+        patient_gender = #{patientGender,jdbcType=INTEGER},
+      </if>
+      <if test="patientAge != null">
+        patient_age = #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="patientAccountNumber != null">
+        patient_account_number = #{patientAccountNumber,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="patientStatus != null">
+        patient_status = #{patientStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="patientUuid != null">
+        patient_uuid = #{patientUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cunjunwang.hospital.model.po.HPatient">
+    update h_patient
+    set patient_name = #{patientName,jdbcType=VARCHAR},
+      patient_gender = #{patientGender,jdbcType=INTEGER},
+      patient_age = #{patientAge,jdbcType=INTEGER},
+      patient_account_number = #{patientAccountNumber,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=TINYINT},
+      patient_status = #{patientStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      patient_uuid = #{patientUuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
