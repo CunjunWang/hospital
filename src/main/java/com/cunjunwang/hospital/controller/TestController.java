@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ApiOperation(value = "[测试]测试", notes = "[测试API]测试APO")
+    @ApiOperation(value = "[测试]测试", notes = "[测试API]测试API")
     public ResultData<String> test(@ApiParam(name = "name", value = "测试参数", required = false) @RequestParam String name) {
         return new ResultData<>(ResultData.SUCCESS, "", "测试接口调用成功", name);
     }

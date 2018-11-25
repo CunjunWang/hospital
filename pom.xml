@@ -36,7 +36,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <!-- Swagger2 Dependency -->
         <dependency>
@@ -59,7 +58,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!--mybatis-->
         <dependency>
@@ -83,14 +81,6 @@
                 <configuration>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
-                </configuration>
-            </plugin>
-            <!--使用下边的插件可以跳过测试test中的测试-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
