@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cunjunwang.hospital.dao.HStaffMapper">
+    <resultMap id="BaseResultMap" type="com.cunjunwang.hospital.model.po.HStaff">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="staff_uuid" jdbcType="VARCHAR" property="staffUuid"/>
+        <result column="staff_name" jdbcType="VARCHAR" property="staffName"/>
+        <result column="staff_age" jdbcType="INTEGER" property="staffAge"/>
+        <result column="staff_department" jdbcType="BIGINT" property="staffDepartment"/>
+        <result column="staff_type" jdbcType="INTEGER" property="staffType"/>
+        <result column="staff_gender" jdbcType="INTEGER" property="staffGender"/>
+        <result column="staff_is_on_job" jdbcType="TINYINT" property="staffIsOnJob"/>
+        <result column="staff_experience" jdbcType="INTEGER" property="staffExperience"/>
+        <result column="staff_description" jdbcType="VARCHAR" property="staffDescription"/>
+        <result column="is_del" jdbcType="TINYINT" property="isDel"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, staff_uuid, staff_name, staff_age, staff_department, staff_type, staff_gender, 
+    staff_is_on_job, staff_experience, staff_description, is_del, create_time, create_by, 
+    update_time, update_by
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_staff
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_staff where is_del = 0
+    </select>
+    <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HStaff">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into h_staff (id, staff_uuid, staff_name,
+        staff_age, staff_department, staff_type,
+        staff_gender, staff_is_on_job, staff_experience,
+        staff_description, is_del, create_time,
+        create_by, update_time, update_by
+        )
+        values (#{id,jdbcType=BIGINT}, #{staffUuid,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR},
+        #{staffAge,jdbcType=INTEGER}, #{staffDepartment,jdbcType=BIGINT}, #{staffType,jdbcType=INTEGER},
+        #{staffGender,jdbcType=INTEGER}, #{staffIsOnJob,jdbcType=TINYINT}, #{staffExperience,jdbcType=INTEGER},
+        #{staffDescription,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.cunjunwang.hospital.model.po.HStaff">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into h_staff
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="staffUuid != null">
+                staff_uuid,
+            </if>
+            <if test="staffName != null">
+                staff_name,
+            </if>
+            <if test="staffAge != null">
+                staff_age,
+            </if>
+            <if test="staffDepartment != null">
+                staff_department,
+            </if>
+            <if test="staffType != null">
+                staff_type,
+            </if>
+            <if test="staffGender != null">
+                staff_gender,
+            </if>
+            <if test="staffIsOnJob != null">
+                staff_is_on_job,
+            </if>
+            <if test="staffExperience != null">
+                staff_experience,
+            </if>
+            <if test="staffDescription != null">
+                staff_description,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=BIGINT},
+            <if test="staffUuid != null">
+                #{staffUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="staffName != null">
+                #{staffName,jdbcType=VARCHAR},
+            </if>
+            <if test="staffAge != null">
+                #{staffAge,jdbcType=INTEGER},
+            </if>
+            <if test="staffDepartment != null">
+                #{staffDepartment,jdbcType=BIGINT},
+            </if>
+            <if test="staffType != null">
+                #{staffType,jdbcType=INTEGER},
+            </if>
+            <if test="staffGender != null">
+                #{staffGender,jdbcType=INTEGER},
+            </if>
+            <if test="staffIsOnJob != null">
+                #{staffIsOnJob,jdbcType=TINYINT},
+            </if>
+            <if test="staffExperience != null">
+                #{staffExperience,jdbcType=INTEGER},
+            </if>
+            <if test="staffDescription != null">
+                #{staffDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cunjunwang.hospital.model.po.HStaff">
+        update h_staff
+        <set>
+            <if test="staffUuid != null">
+                staff_uuid = #{staffUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="staffName != null">
+                staff_name = #{staffName,jdbcType=VARCHAR},
+            </if>
+            <if test="staffAge != null">
+                staff_age = #{staffAge,jdbcType=INTEGER},
+            </if>
+            <if test="staffDepartment != null">
+                staff_department = #{staffDepartment,jdbcType=BIGINT},
+            </if>
+            <if test="staffType != null">
+                staff_type = #{staffType,jdbcType=INTEGER},
+            </if>
+            <if test="staffGender != null">
+                staff_gender = #{staffGender,jdbcType=INTEGER},
+            </if>
+            <if test="staffIsOnJob != null">
+                staff_is_on_job = #{staffIsOnJob,jdbcType=TINYINT},
+            </if>
+            <if test="staffExperience != null">
+                staff_experience = #{staffExperience,jdbcType=INTEGER},
+            </if>
+            <if test="staffDescription != null">
+                staff_description = #{staffDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cunjunwang.hospital.model.po.HStaff">
+    update h_staff
+    set staff_uuid = #{staffUuid,jdbcType=VARCHAR},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      staff_age = #{staffAge,jdbcType=INTEGER},
+      staff_department = #{staffDepartment,jdbcType=BIGINT},
+      staff_type = #{staffType,jdbcType=INTEGER},
+      staff_gender = #{staffGender,jdbcType=INTEGER},
+      staff_is_on_job = #{staffIsOnJob,jdbcType=TINYINT},
+      staff_experience = #{staffExperience,jdbcType=INTEGER},
+      staff_description = #{staffDescription,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

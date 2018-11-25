@@ -3,6 +3,8 @@ package com.cunjunwang.hospital.dao;
 import com.cunjunwang.hospital.model.po.HPatient;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface HPatientMapper {
     int insert(HPatient record);
@@ -14,4 +16,6 @@ public interface HPatientMapper {
     int updateByPrimaryKeySelective(HPatient record);
 
     int updateByPrimaryKey(HPatient record);
+
+    List<HPatient> selectAll();
 }
