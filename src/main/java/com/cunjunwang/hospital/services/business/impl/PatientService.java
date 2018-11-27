@@ -1,6 +1,7 @@
 package com.cunjunwang.hospital.services.business.impl;
 
 import com.cunjunwang.hospital.model.po.HPatient;
+import com.cunjunwang.hospital.model.vo.ModifyPatientVO;
 import com.cunjunwang.hospital.services.business.IPatientService;
 import com.cunjunwang.hospital.services.dbservice.HPatientDBService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,15 @@ public class PatientService implements IPatientService {
     @Override
     public List<HPatient> getPatientInfoList() {
         return patientDBService.selectAll();
+    }
+
+    @Override
+    public Boolean addOrUpdatePatientInfo(ModifyPatientVO modifyPatientVO) {
+        return null;
+    }
+
+    @Override
+    public Boolean deletePatientInfo(Long patientId) {
+        return null;
     }
 }
