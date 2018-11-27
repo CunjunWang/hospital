@@ -1,6 +1,7 @@
 package com.cunjunwang.hospital.services.business.impl;
 
 import com.cunjunwang.hospital.model.po.HStaff;
+import com.cunjunwang.hospital.model.vo.ModifyStaffVO;
 import com.cunjunwang.hospital.services.business.IStaffService;
 import com.cunjunwang.hospital.services.dbservice.HStaffDBService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,15 @@ public class StaffService implements IStaffService {
     @Override
     public List<HStaff> getStaffInfoList() {
         return staffDBService.selectAll();
+    }
+
+    @Override
+    public Boolean addOrUpdateStaffInfo(ModifyStaffVO modifyStaffVO) {
+        return null;
+    }
+
+    @Override
+    public Boolean deleteStaffInfo(Long staffId) {
+        return null;
     }
 }
