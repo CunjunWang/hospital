@@ -3,6 +3,8 @@ package com.cunjunwang.hospital.dao;
 import com.cunjunwang.hospital.model.po.HWard;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface HWardMapper {
     int insert(HWard record);
@@ -14,4 +16,6 @@ public interface HWardMapper {
     int updateByPrimaryKeySelective(HWard record);
 
     int updateByPrimaryKey(HWard record);
+
+    List<HWard> selectAll();
 }

@@ -24,8 +24,12 @@
     from h_medicine
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HMedicine">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from h_medicine where is_del = 0
+    </select>
+    <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HMedicine">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into h_medicine (id, medicine_name, medicine_description, 
@@ -38,7 +42,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.cunjunwang.hospital.model.po.HMedicine">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into h_medicine

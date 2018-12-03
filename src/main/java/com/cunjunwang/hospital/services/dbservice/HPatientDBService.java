@@ -26,4 +26,26 @@ public class HPatientDBService {
     public List<HPatient> selectAll() {
         return patientMapper.selectAll();
     }
+
+    public Boolean updateInfo(HPatient originPatient) {
+        if(originPatient == null) {
+            return null;
+        }
+        return patientMapper.updateByPrimaryKeySelective(originPatient) == 1;
+    }
+
+    public Long insertInfo(HPatient newPatient) {
+        if(newPatient == null) {
+            return null;
+        }
+        patientMapper.insertSelective(newPatient);
+        return newPatient.getId();
+    }
+
+    public Boolean deleteById(Long patientId) {
+        if(patientId == null) {
+            return null;
+        }
+        return patientMapper.deleteByPrimaryKey(patientId) == 1;
+    }
 }
