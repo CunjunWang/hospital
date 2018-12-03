@@ -23,8 +23,12 @@
     from h_ward
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HWard">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from h_ward where is_del = 0
+    </select>
+    <insert id="insert" parameterType="com.cunjunwang.hospital.model.po.HWard">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into h_ward (id, ward_room_number, ward_floor, 
@@ -37,7 +41,7 @@
       #{wardType,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.cunjunwang.hospital.model.po.HWard">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into h_ward

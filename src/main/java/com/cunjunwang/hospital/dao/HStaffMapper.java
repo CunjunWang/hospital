@@ -1,6 +1,7 @@
 package com.cunjunwang.hospital.dao;
 
 import com.cunjunwang.hospital.model.po.HStaff;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface HStaffMapper {
     int updateByPrimaryKey(HStaff record);
 
     List<HStaff> selectAll();
+
+    int deleteByPrimaryKey(@Param("staffId") Long staffId);
 }

@@ -23,9 +23,9 @@ public class Constant {
     /** 审核未通过 */
     public static final String NOT_APPROVED = "10021003";
     /** 逻辑删除标识-已删除 */
-    public static final Integer IS_DEL = 1;
+    public static final Byte IS_DEL = 1;
     /** 逻辑删除标识-未删除 */
-    public static final Integer NOT_DEL = 0;
+    public static final Byte NOT_DEL = 0;
 
     /** -------------------------------分页参数---------------------------------*/
 

@@ -3,6 +3,8 @@ package com.cunjunwang.hospital.services.business.impl;
 import com.cunjunwang.hospital.model.po.HMedicine;
 import com.cunjunwang.hospital.model.vo.ModifyMedicineVO;
 import com.cunjunwang.hospital.services.business.IMedicineService;
+import com.cunjunwang.hospital.services.dbservice.HMedicineDBService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +15,17 @@ import java.util.List;
 @Service
 public class MedicineService implements IMedicineService {
 
+    @Autowired
+    private HMedicineDBService medicineDBService;
 
     @Override
     public HMedicine getOneMedicineInfo(Long medicineId) {
-        return null;
+        return medicineDBService.selectById(medicineId);
     }
 
     @Override
     public List<HMedicine> getMedicineInfoList() {
-        return null;
+        return medicineDBService.selectAll();
     }
 
     @Override

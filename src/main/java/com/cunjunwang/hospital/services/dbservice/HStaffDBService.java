@@ -26,4 +26,26 @@ public class HStaffDBService {
     public List<HStaff> selectAll() {
         return staffMapper.selectAll();
     }
+
+    public Boolean updateInfo(HStaff originStaff) {
+        if(originStaff == null) {
+            return null;
+        }
+        return staffMapper.updateByPrimaryKeySelective(originStaff) == 1;
+    }
+
+    public Long insertInfo(HStaff newStaff) {
+        if(newStaff == null) {
+            return null;
+        }
+        staffMapper.insertSelective(newStaff);
+        return newStaff.getId();
+    }
+
+    public Boolean deleteById(Long staffId) {
+        if(staffId == null) {
+            return null;
+        }
+        return staffMapper.deleteByPrimaryKey(staffId) == 1;
+    }
 }
