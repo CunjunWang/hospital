@@ -1,118 +1,86 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-DROP Database if exists hospital;
-CREATE Database hospital;
-USE hospital;
-alter database hospital character set 'utf8mb4';
-
-create table if not exists h_patient (
-  id                     bigint auto_increment
-  comment '主键'
-    primary key,
-  patient_name           varchar(200)                       null
-  comment '病人姓名',
-  patient_gender         int                                null
-  comment '病人性别',
-  patient_age            int                                null
-  comment '病人年龄',
-  patient_account_number bigint                             null
-  comment '病人账号',
-  is_del                 tinyint default '0'                null
-  comment '逻辑删除标识符 0-未删除 1-已删除',
-  patient_status         int                                null
-  comment '病人状态',
-  create_time            datetime default CURRENT_TIMESTAMP null
-  comment '创建时间',
-  create_by              bigint                             null
-  comment '创建人账号Id',
-  update_time            datetime default CURRENT_TIMESTAMP null
-  comment '更新时间',
-  update_by              bigint                             null
-  comment '更新人账号Id',
-  patient_uuid           varchar(200)                       null
-  comment '病人UUID'
-) comment '病人表';
+DROP Database if exists hospital_emp;
+CREATE Database hospital_emp;
+USE hospital_emp;
+alter database hospital_emp character set 'utf8mb4';
 
 create table if not exists h_staff (
-  id                bigint auto_increment
-  comment '主键'
-    primary key,
-  staff_uuid        varchar(200)                       null
-  comment '职员UUID',
-  staff_name        varchar(200)                       null
-  comment '职员姓名',
-  staff_age         int                                null
-  comment '职员年龄',
-  staff_department  bigint default '0'                 not null
-  comment '职员部门编号',
-  staff_type        int                                null
-  comment '职员类型 0-医生 1-护士',
-  staff_gender      int                                null
-  comment '职员性别',
-  staff_is_on_job   tinyint default '1'                null
-  comment '是否在职 0-不在职 1-在职',
-  staff_experience  int                                null
-  comment '工作年限',
-  staff_description varchar(200)                       null
-  comment '职员描述',
-  is_del            tinyint default '0'                null
-  comment '逻辑删除标识符 0-未删除 1-已删除',
-  create_time       datetime default CURRENT_TIMESTAMP null
-  comment '创建时间',
-  create_by         bigint                             null
-  comment '创建人Id',
-  update_time       datetime default CURRENT_TIMESTAMP null
-  comment '更新时间',
-  update_by         bigint                             null
-  comment '更新人Id'
-) comment '职员表';
+  ID                   bigint not null AUTO_INCREMENT comment '主键',
+  uuid                 varchar(200) comment '用户唯一标识',
+  company_id           bigint comment '所属公司ID',
+  company_name         varchar(200) comment '所属公司名称',
+  hospital             varchar(200) comment '所属医院',
+  role_id              bigint comment '角色表ID',
+  role_code            varchar(200) comment '角色代码',
+  role_name            varchar(200) comment '角色名称',
+  level_id             bigint comment '能级ID',
+  level_name           varchar(200) comment '能级名称',
+  emp_name             varchar(200) comment '姓名',
+  identity             varchar(200) comment '身份证号',
+  emp_no               varchar(200) comment '工号',
+  mobile               bigint comment '手机号',
+  is_onjob             int comment '是否在职，0在职，1离职',
+  on_job_date          date comment '入职日期',
+  off_job_date         date comment '离职日期',
+  remark               varchar(200) comment '备注',
+  is_del               int comment '0有效，1失效',
+  create_date          datetime,
+  create_by            bigint,
+  update_date          datetime,
+  update_by            bigint,
+  primary key (ID)
+);
 
-create table if not exists h_medicine (
-  id                   bigint auto_increment
-  comment '主键'
-    primary key,
-  medicine_name        varchar(200)                       null
-  comment '药品名称',
-  medicine_description varchar(200)                       null
-  comment '药品描述',
-  medicine_price       decimal(14,2)                      null
-  comment '药品价格',
-  medicine_stock       bigint default '0'                 null
-  comment '药品库存',
-  medicine_type        tinyint                            null
-  comment '药品类型 0-非处方药 1-处方药',
-  is_del               tinyint default '0'                null
-  comment '逻辑删除标识符 0-未删除 1-已删除',
-  create_time          datetime default CURRENT_TIMESTAMP null
-  comment '创建时间',
-  create_by            bigint                             null
-  comment '创建人Id',
-  update_time          datetime default CURRENT_TIMESTAMP null
-  comment '更新时间',
-  update_by            bigint                             null
-  comment '更新人Id'
-) comment '药品表';
+create table if not exists h_staff_level
+(
+  ID                   bigint not null AUTO_INCREMENT comment '主键',
+  level_code           varchar(200) comment '等级代码',
+  level_name           varchar(200) comment '能级名称',
+  remark               varchar(200) comment '备注',
+  is_del               int comment '逻辑删除标识，0有效，1无效',
+  primary key (ID)
+);
 
-create table if not exists h_ward (
-  id               bigint auto_increment
-  comment '主键'
-    primary key,
-  ward_room_number bigint                             null
-  comment '病房号',
-  ward_floor       bigint                             null
-  comment '病房所在楼层',
-  ward_capacity    int                                null
-  comment '病房容纳病人数',
-  is_del           tinyint default '0'                null
-  comment '逻辑删除标识符 0-未删除 1-已删除',
-  create_date      datetime default CURRENT_TIMESTAMP null
-  comment '创建时间',
-  create_by        bigint                             null
-  comment '创建人Id',
-  update_time      datetime default CURRENT_TIMESTAMP null
-  comment '更新时间',
-  update_by        bigint                             null
-  comment '更新人Id',
-  ward_type        bigint                             null
-  comment '病房类型'
-) comment '病房表';
+create table if not exists h_staff_role
+(
+  ID                   bigint not null AUTO_INCREMENT comment '主键',
+  role_code            varchar(200) comment 'DOCTOR, NURSE等',
+  role_name            varchar(200) comment '角色名称(医生、护士等)',
+  remark               varchar(200) comment '备注',
+  is_del               int comment '逻辑删除标识，0有效，1无效',
+  primary key (ID)
+);
+
+create table if not exists h_staff_attachment
+(
+  ID                   bigint not null AUTO_INCREMENT comment '主键',
+  emp_id               varchar(200) comment '员工ID',
+  attach_url           varchar(200) comment '附件地址',
+  attach_type          int comment '附件类型,身份证/保密协议/证件照/头像(见主数据表)',
+  attach_type_name     varchar(200) comment '附件类型名称',
+  is_del               int comment '逻辑删除标识，0有效，1无效',
+  create_date          datetime comment '上传时间',
+  create_by            bigint comment '上传人',
+  update_date          datetime comment '更新时间',
+  update_by            bigint comment '更新人',
+  primary key (ID)
+);
+
+create table if not exists h_staff_level_history
+(
+  ID                   bigint not null AUTO_INCREMENT,
+  emp_id               bigint comment '员工ID',
+  emp_name             varchar(200) comment '员工姓名',
+  level_id             bigint comment '级别ID',
+  level_name           varchar(200) comment '级别名称',
+  start_date           date comment '开始日期',
+  end_date             date comment '结束日期',
+  status               varchar(200) comment '状态(见元数据表1001类型)',
+  is_del               int comment '逻辑删除标识',
+  create_by            bigint comment '创建人',
+  create_date          datetime comment '创建时间',
+  update_by            bigint comment '更新人',
+  update_date          datetime comment '更新时间',
+  primary key (ID)
+);
